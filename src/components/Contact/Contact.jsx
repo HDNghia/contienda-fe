@@ -44,7 +44,7 @@ const Contact = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await fetch("http://localhost:3000/api/contacts", {
+        const response = await fetch("https://be.contienda.wealthfarming.org/api/contacts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

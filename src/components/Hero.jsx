@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 
 const fetchAPI = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/api/globals/product-recommend?depth=1&draft=false&locale=undefined`);
+    const response = await fetch(`https://be.contienda.wealthfarming.org/api/globals/product-recommend?depth=1&draft=false&locale=undefined`);
     console.log('check response: ', response);
     if (!response.ok) {
       const errorText = await response.text(); // Get the HTML or error message
@@ -24,7 +24,7 @@ const mapAPIToHeadphoneData = (apiData) => {
   return [
     {
       id: apiData.product_1.id,
-      image: `http://localhost:3000${apiData.image_1.url}`, // Assuming images are Fanta1, Fanta2, etc.
+      image: `https://be.contienda.wealthfarming.org${apiData.image_1.url}`, // Assuming images are Fanta1, Fanta2, etc.
       title: apiData.product_1.title,
       subtitle: apiData.product_1.description,
       price: `${apiData.product_1.price}`,
@@ -32,7 +32,7 @@ const mapAPIToHeadphoneData = (apiData) => {
     },
     {
       id: apiData.product_2.id,
-      image: `http://localhost:3000${apiData.image_2.url}`,
+      image: `https://be.contienda.wealthfarming.org${apiData.image_2.url}`,
       title: apiData.product_2.title,
       subtitle: apiData.product_2.description,
       price: `${apiData.product_2.price}`,
@@ -40,7 +40,7 @@ const mapAPIToHeadphoneData = (apiData) => {
     },
     {
       id: apiData.product_3.id,
-      image: `http://localhost:3000${apiData.image_3.url}`,
+      image: `https://be.contienda.wealthfarming.org${apiData.image_3.url}`,
       title: apiData.product_3.title,
       subtitle: apiData.product_3.description,
       price: `${apiData.product_3.price}`,

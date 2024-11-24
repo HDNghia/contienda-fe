@@ -13,7 +13,7 @@ const ProductsPage = ({ handleOrderPopup }) => {
           ? `?where[title][contains]=${encodeURIComponent(searchQuery)}`
           : "";
         const response = await fetch(
-          `http://localhost:3000/api/products${queryParam}`
+          `https://be.contienda.wealthfarming.org/api/products${queryParam}`
         );
         const data = await response.json();
 
@@ -21,7 +21,7 @@ const ProductsPage = ({ handleOrderPopup }) => {
         const formattedData = data.docs.map((product) => ({
           id: product.id,
           title: product.title,
-          image: `http://localhost:3000${product.image.url}`, // Adjusting to include the base URL
+          image: `https://be.contienda.wealthfarming.org${product.image.url}`, // Adjusting to include the base URL
           description: product.description,
           price: `${product.price.toLocaleString()}₫`, // Format price with thousands separator
         }));
