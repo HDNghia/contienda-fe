@@ -237,7 +237,7 @@ const Hero = ({ handleOrderPopup }) => {
                 }}
                 src={activeData.image}
                 alt=""
-                className="w-[150px] md:w-[200px] xl:w-[350px] img-shadow relative z-10 bottom-20"
+                className="w-[150px] md:w-[200px] xl:w-[350px] img-shadow relative z-10 lg:bottom-20"
               />
             </AnimatePresence>
           </div>
