@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo-duynam.jpg";
 import { MdMenu } from "react-icons/md";
 import { motion } from "framer-motion";
 import { UpdateFollower } from "react-mouse-follower";
@@ -43,8 +43,15 @@ const NavbarTop = () => {
         className="container flex justify-between items-center py-3 md:py-8"
       >
         {/* Logo Section */}
-        <div>
-          <img src={Logo} alt="Logo" className="max-w-[100px] invert" />
+        {/* Logo Section */}
+        <div className="flex items-center justify-center p-6 rounded-xl">
+          <div className="bg-white rounded-lg p-4 shadow-md">
+            <img
+              src={Logo}
+              alt="Duy Nam Logo"
+              className="w-[80px] h-auto object-contain"
+            />
+          </div>
         </div>
         {/* Menu Section */}
         <div className="hidden md:block">

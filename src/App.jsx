@@ -1,6 +1,5 @@
 import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Products from "./components/Products/Products";
 import ProductsPage from "./components/PageProduct/ProductsPage";
 import Footer from "./components/Footer/Footer";
 import NavbarTop from "./components/NavbarTop/NavbarTop";

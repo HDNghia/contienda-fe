@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ProductsPage = ({ handleOrderPopup }) => {
-  const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
