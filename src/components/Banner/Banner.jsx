@@ -1,102 +1,101 @@
 import React from "react";
-import BannerImg from "../../assets/women/women2.jpg";
-import { GrSecure } from "react-icons/gr";
-import { IoFastFood } from "react-icons/io5";
-import { GiFoodTruck } from "react-icons/gi";
 import { motion } from "framer-motion";
+import { FaShieldAlt, FaTruck, FaMoneyBillWave, FaHeadset } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export const fadeUp = (delay) => {
-  return {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: delay,
-      },
-    },
-  };
-};
+const fadeUp = (delay) => ({
+  hidden: { opacity: 0, y: 50 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay },
+  },
+});
 
 const Banner = () => {
-  return (
-    <div className="min-h-[550px] flex justify-center items-center py-12 sm:py-0">
-      <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-          {/* Phần hình ảnh */}
-          <motion.div
-            variants={fadeUp(0.2)}
-            initial="hidden"
-            whileInView={"show"}
-            data-aos="zoom-in"
-          >
-            <img
-              src={BannerImg}
-              alt=""
-              className="max-w-[400px] h-[350px] w-full mx-auto drop-shadow-[-10px_10px_12px_rgba(0,0,0,1)] object-cover"
-            />
-          </motion.div>
-          {/* Phần chi tiết nội dung */}
-          <div className="flex flex-col justify-center gap-6 sm:pt-0">
-            <motion.div
-              variants={fadeUp(0.2)}
-              initial="hidden"
-              whileInView={"show"}
-            >
-              <h1 data-aos="fade-up" className="text-3xl sm:text-4xl font-bold">
-                Giảm Giá Mùa Đông Lên Đến 50%
-              </h1>
-            </motion.div>
+  const navigate = useNavigate();
+  const features = [
+    {
+      icon: <FaShieldAlt className="text-4xl text-primary" />,
+      title: "Chất Lượng Đảm Bảo",
+      description: "Chúng tôi cam kết cung cấp sản phẩm chất lượng cao nhất cho khách hàng.",
+      stat: "100%",
+      statDescription: "Sản phẩm chính hãng",
+    },
+    {
+      icon: <FaTruck className="text-4xl text-primary" />,
+      title: "Giao Hàng Nhanh Chóng",
+      description: "Dịch vụ giao hàng nhanh chóng và đáng tin cậy trên toàn quốc.",
+      stat: "24h",
+      statDescription: "Giao hàng trong nội thành",
+    },
+    {
+      icon: <FaMoneyBillWave className="text-4xl text-primary" />,
+      title: "Giá Cả Hợp Lý",
+      description: "Chúng tôi cung cấp giá cả cạnh tranh mà không ảnh hưởng đến chất lượng.",
+      stat: "10%",
+      statDescription: "Tiết kiệm trung bình",
+    },
+    {
+      icon: <FaHeadset className="text-4xl text-primary" />,
+      title: "Hỗ Trợ 24/7",
+      description: "Đội ngũ hỗ trợ khách hàng luôn sẵn sàng giúp đỡ bạn mọi lúc.",
+      stat: "24/7",
+      statDescription: "Hỗ trợ khách hàng",
+    },
+  ];
 
-            <div className="flex flex-col gap-4">
-              <motion.div
-                variants={fadeUp(0.3)}
-                initial="hidden"
-                whileInView={"show"}
-                data-aos="fade-up" className="flex items-center gap-4"
-              >
-                <div data-aos="fade-up" className="flex items-center gap-4">
-                  <GrSecure className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-violet-100 dark:bg-violet-400" />
-                  <p>Sản Phẩm Chất Lượng</p>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeUp(0.5)}
-                initial="hidden"
-                whileInView={"show"}
-                data-aos="fade-up" className="flex items-center gap-4"
-              >
-                <IoFastFood className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-orange-100 dark:bg-orange-400" />
-                <p>Giao Hàng Nhanh</p>
-              </motion.div>
-              <motion.div
-                variants={fadeUp(0.8)}
-                initial="hidden"
-                whileInView={"show"}
-                data-aos="fade-up" className="flex items-center gap-4"
-              >
-                <GiFoodTruck className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-green-100 dark:bg-green-400" />
-                <p>Phương Thức Thanh Toán Dễ Dàng</p>
-              </motion.div>
-              <motion.div
-                variants={fadeUp(0.8)}
-                initial="hidden"
-                whileInView={"show"}
-                data-aos="fade-up" className="flex items-center gap-4"
-              >
-                <GiFoodTruck className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-yellow-100 dark:bg-yellow-400" />
-                <p>Nhận Ưu Đãi</p>
-              </motion.div>
-            </div>
-          </div>
+  return (
+    <div className="bg-gray-100 dark:bg-gray-900 py-16">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          variants={fadeUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          className="text-4xl font-bold text-center mb-12"
+        >
+          Tại Sao Chọn Chúng Tôi?
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={fadeUp(0.3 + index * 0.1)}
+              initial="hidden"
+              whileInView="show"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center transition-transform duration-300 hover:scale-105"
+            >
+              <div className="flex justify-center mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{feature.description}</p>
+              <div className="border-t pt-4">
+                <p className="text-3xl font-bold text-primary mb-1">{feature.stat}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{feature.statDescription}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
+        <motion.div
+          variants={fadeUp(0.7)}
+          initial="hidden"
+          whileInView="show"
+          className="text-center mt-12"
+        >
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            Chúng tôi tự hào mang đến trải nghiệm mua sắm tốt nhất cho bạn. Với cam kết về chất lượng, 
+            dịch vụ và giá trị, chúng tôi luôn nỗ lực để vượt qua sự mong đợi của khách hàng.
+          </p>
+          <button 
+          className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full transition-colors duration-300"
+          onClick={() => navigate("/products")}
+          >
+            Khám Phá Ngay
+          </button>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default Banner;
+

@@ -58,13 +58,13 @@ const FAQ = () => {
             className="flex justify-between items-center cursor-pointer py-4"
             onClick={() => handleClick(index)}
           >
-            <h3 className="text-xl font-semibold text-gray-800">
+            <h3 className="text-xl font-semibold ">
               {item.question}
             </h3>
             <span>{active === index ? "-" : "+"}</span>
           </div>
 
-          {active === index && <p className="text-gray-600">{item.answer}</p>}
+          {active === index && <p className="">{item.answer}</p>}
         </div>
       ))}
     </div>

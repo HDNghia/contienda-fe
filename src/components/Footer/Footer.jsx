@@ -9,6 +9,7 @@ import {
 import { FaMapLocation } from "react-icons/fa6";
 import Logo from "../../assets/logo-duynam.jpg";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const FooterMenu = [
   {
@@ -34,15 +35,13 @@ const FooterMenu = [
 ];
 
 const Footer = () => {
-  const handleNavigation = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
+    const handleNavigation = (id) => {
+      navigate("/", { state: { sectionId: id } }); // Navigate to home with sectionId
+    };
 
   return (
-    <footer className="bg-primary pt-12 pb-8 text-white">
+    <footer className="bg-gray-500 dark:bg-gray-950 pt-12 pb-8 text-white">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {/* Company Information */}
@@ -68,7 +67,11 @@ const Footer = () => {
             <div>
               <p className="flex items-center gap-2">
                 <FaPhone />
-                +84 931929256
+                +84 905020856
+              </p>
+              <p className="flex items-center gap-2">
+                <FaPhone />
+                +84 794195936
               </p>
               <p className="flex items-center gap-2 mt-2">
                 <FaMapLocation />

@@ -34,7 +34,7 @@ const ProductsPage = ({ handleOrderPopup }) => {
   }, [searchQuery]); // Refetch when searchQuery changes
 
   return (
-    <div className="bg-gray-100 py-8">
+    <div className="bg-gray-100 dark:bg-gray-900 py-8">
       <div className="container py-14">
         <h1 className="text-3xl font-bold text-center pb-10">
           Sản Phẩm Của Chúng Tôi
@@ -56,23 +56,29 @@ const ProductsPage = ({ handleOrderPopup }) => {
           {productsData.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col items-center justify-center p-5 max-w-[300px] mx-auto shadow-lg rounded-xl bg-white"
+              onClick={handleOrderPopup}
+              className="cursor-pointer flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-transform duration-300 hover:scale-105"
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-[100px] mb-4 hover:rotate-12 hover:scale-110 duration-300"
-              />
-              <div className="text-center space-y-2">
-                <h1 className="text-2xl font-bold">{item.title}</h1>
-                <p className="text-center text-sm text-gray-600">{item.description}</p>
-                <p className="text-lg font-semibold text-gray-800">{item.price}</p>
-                <button
-                  onClick={handleOrderPopup}
-                  className="!mt-5 border-2 border-primary text-primary px-6 py-2 rounded-md hover:bg-primary hover:text-white duration-200"
-                >
-                  Đặt Ngay
-                </button>
+              <div className="relative h-64 w-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h2 className="text-3xl font-bold font-handwriting mb-3">{item.title}</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{item.description}</p>
+                <div className="flex justify-between items-center">
+                  <p className="text-2xl font-semibold text-primary">
+                    {item.price}
+                  </p>
+                  <button
+                    className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-colors duration-200"
+                  >
+                    Đặt Ngay
+                  </button>
+                </div>
               </div>
             </div>
           ))}

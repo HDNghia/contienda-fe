@@ -79,7 +79,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
-                  required
                 />
                 <input
                   type="email"
@@ -88,7 +87,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
-                  required
                 />
                 <input
                   type="text"
@@ -97,7 +95,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
-                  required
                 />
                 <textarea
                   name="message"
@@ -106,7 +103,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   onChange={handleChange}
                   rows="4"
                   className="w-full rounded-lg border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
-                  required
                 ></textarea>
                 {/* Success or Error Message */}
                 {successMessage && (

@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Img1 from "../../assets/shirt/shirt.png";
-import Img2 from "../../assets/shirt/shirt2.png";
-import Img3 from "../../assets/shirt/shirt3.png";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -100,70 +97,66 @@ const TopProducts = ({ handleOrderPopup }) => {
     fetchData();
   }, []);
   return (
-    <div>
-      <div className="container pt-5">
-        {/* Phần tiêu đề */}
-        <div className="text-left mb-24">
+    <div className="bg-gray-100 dark:bg-gray-900 py-16">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
           <motion.h1
             variants={fadeUp(0.2)}
             initial="hidden"
             whileInView={"show"}
-            data-aos="fade-up"
-            className="text-3xl font-bold"
+            className="text-4xl font-bold mb-4"
           >
-            Sản Phẩm Tốt Nhất
+            Sản Phẩm Bán Chạy
           </motion.h1>
           <motion.p
-            variants={fadeUp(0.2)}
+            variants={fadeUp(0.3)}
             initial="hidden"
             whileInView={"show"}
-            data-aos="fade-up"
-            className="text-xs text-gray-400"
+            className="text-lg text-gray-600 dark:text-gray-400"
           >
             Chúng tôi cung cấp các sản phẩm chất lượng cao, phù hợp với mọi nhu cầu của bạn.
           </motion.p>
         </div>
-        {/* Phần sản phẩm */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 md:gap-5 place-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {productsData.map((data) => (
             <motion.div
               variants={fadeUp(data.delay)}
               key={data.id}
               initial="hidden"
               whileInView={"show"}
-              data-aos="zoom-in"
-              className="rounded-2xl bg-white dark:bg-gray-800 hover:bg-black/80 dark:hover:bg-primary hover:text-white relative shadow-xl duration-300 group max-w-[300px]"
+              onClick={handleOrderPopup}
+              className="cursor-pointer bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 hover:scale-105"
             >
-              {/* Phần hình ảnh */}
-              <div className="h-[100px]">
+              <div className="relative h-80 overflow-hidden">
                 <img
                   src={data.image}
-                  alt=""
-                  className="max-w-[140px] block mx-auto transform -translate-y-20 group-hover:scale-105 duration-300 drop-shadow-md"
+                  alt={data.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
-              </div>
-              {/* Phần chi tiết */}
-              <div className="p-4 text-center">
-                {/* Xếp hạng sao */}
-                <div className="w-full flex items-center justify-center gap-1">
-                  <FaStar className="text-yellow-500" />
-                  <FaStar className="text-yellow-500" />
-                  <FaStar className="text-yellow-500" />
-                  <FaStar className="text-yellow-500" />
+                <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-full p-2 shadow-md">
+                  <div className="flex items-center gap-1">
+                    <FaStar className="text-yellow-500" />
+                    <FaStar className="text-yellow-500" />
+                    <FaStar className="text-yellow-500" />
+                    <FaStar className="text-yellow-500" />
+                  </div>
                 </div>
-                <h1 className="text-xl font-bold">{data.title}</h1>
-                <p className="text-gray-500 group-hover:text-white duration-300 text-sm line-clamp-2">
+              </div>
+              <div className="p-6">
+                <h2 className="text-2xl font-bold mb-2">{data.title}</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                   {data.description}
                 </p>
-                <p className="text-lg font-semibold text-gray-800 group-hover:text-white">
-                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.price)}
-                </p>
-                <button
-                  className="bg-primary hover:scale-105 duration-300 text-white py-1 px-4 rounded-full mt-4 group-hover:bg-white group-hover:text-primary"
-                  onClick={() => handleOrderPopup()}
-                >
-                  Đặt Hàng Ngay
-                </button>
+                <div className="flex justify-between items-center">
+                  <p className="text-2xl font-semibold text-primary">
+                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(data.price))}
+                  </p>
+                  <button
+                    className="bg-primary hover:bg-primary-dark text-white py-2 px-6 rounded-full transition-colors duration-300"
+                  >
+                    Đặt Hàng Ngay
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}

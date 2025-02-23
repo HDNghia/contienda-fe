@@ -19,33 +19,6 @@ export const fadeUp = (delay) => {
   };
 };
 
-// const productsData = [
-//   {
-//     id: 1,
-//     title: "Fanta Cam",
-//     image: P1,
-//     description: "Fanta Cam với hương vị thơm ngon, tươi mát. Thích hợp để giải khát.",
-//     price: "40.000₫",
-//     delay: 0.5,
-//   },
-//   {
-//     id: 2,
-//     title: "Fanta Chanh",
-//     description: "Fanta Chanh mang đến sự sảng khoái với hương vị chanh tự nhiên.",
-//     image: P2,
-//     price: "60.000₫",
-//     delay: 0.8,
-//   },
-//   {
-//     id: 3,
-//     title: "Cola Không Đường",
-//     description: "Cola Không Đường là sự lựa chọn hoàn hảo cho người yêu thích vị cola truyền thống mà không sợ đường.",
-//     image: P3,
-//     price: "70.000₫",
-//     delay: 1.1,
-//   },
-// ];
-
 const Products = ({ handleOrderPopup }) => {
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
@@ -96,59 +69,63 @@ const Products = ({ handleOrderPopup }) => {
   }, []);
 
   return (
-    <div className="bg-gray-100 py-8">
-      <div className="container py-14">
+    <div className="bg-gray-100 dark:bg-gray-950 py-16">
+      <div className="container mx-auto px-4">
         <motion.h1
           variants={fadeUp(0.2)}
           initial="hidden"
           whileInView="show"
-          className="text-3xl font-bold text-center pb-10"
+          className="text-4xl font-bold text-center pb-12"
         >
           Sản Phẩm Của Chúng Tôi
         </motion.h1>
-        {/* Phần các thẻ sản phẩm */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {productsData.map((item) => (
             <motion.div
               variants={fadeUp(item.delay)}
               key={item.id}
               initial="hidden"
               whileInView={"show"}
-              className="flex flex-col items-center justify-center p-5 max-w-[300px] mx-auto shadow-lg rounded-xl bg-white"
+              onClick={handleOrderPopup}
+              className="cursor-pointer flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-transform duration-300 hover:scale-105"
             >
-              <img
-                src={item.image}
-                alt=""
-                className="w-[100px] mb-4 hover:rotate-12 hover:scale-110 duration-300"
-              />
-              <div className="text-center space-y-2">
-                <h1 className="text-2xl font-bold font-handwriting text-center">
-                  {item.title}
-                </h1>
-                <p className="text-center text-sm text-gray-600">{item.description}</p>
-                <p className="text-lg font-semibold text-gray-800">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price)}</p>
-                <button
-                  onClick={() => handleOrderPopup()}
-                  className="!mt-5 border-2 border-primary text-primary px-6 py-2 rounded-md hover:bg-primary hover:text-white duration-200"
-                >
-                  Đặt Ngay
-                </button>
+              <div className="relative h-64 w-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h2 className="text-3xl font-bold font-handwriting mb-3">{item.title}</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{item.description}</p>
+                <div className="flex justify-between items-center">
+                  <p className="text-2xl font-semibold text-primary">
+                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(item.price))}
+                  </p>
+                  <button
+                    className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-colors duration-200"
+                  >
+                    Đặt Ngay
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}
-
-          {/* Nút Xem Tất Cả */}
-          <motion.div
-            variants={fadeUp(0.8)}
-            initial="hidden"
-            whileInView="show"
-            className="col-span-full flex justify-center"
-          >
-            <button onClick={() => navigate("/products")} className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
-              Xem Tất Cả
-            </button>
-          </motion.div>
         </div>
+        <motion.div
+          variants={fadeUp(0.8)}
+          initial="hidden"
+          whileInView="show"
+          className="flex justify-center mt-12"
+        >
+          <button
+            onClick={() => navigate("/products")}
+            className="bg-primary text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-primary-dark transition-colors duration-200"
+          >
+            Xem Tất Cả
+          </button>
+        </motion.div>
       </div>
     </div>
   );

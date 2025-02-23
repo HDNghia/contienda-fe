@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,50 +11,55 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Xử lý thay đổi dữ liệu trong form
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: undefined,
+      }));
+    }
   };
 
-  // Kiểm tra tính hợp lệ của form
   const validate = () => {
-    let tempErrors = {};
-    if (!formData.name) tempErrors.name = "Vui lòng nhập họ và tên.";
-    if (!formData.email) {
-      tempErrors.email = "Vui lòng nhập email.";
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Vui lòng nhập họ và tên.";
+    if (!formData.email.trim()) {
+      newErrors.email = "Vui lòng nhập email.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      tempErrors.email = "Email không hợp lệ.";
+      newErrors.email = "Email không hợp lệ.";
     }
-    if (!formData.phone) {
-      tempErrors.phone = "Vui lòng nhập số điện thoại.";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Vui lòng nhập số điện thoại.";
     } else if (!/^\d{10,11}$/.test(formData.phone)) {
-      tempErrors.phone = "Số điện thoại không hợp lệ.";
+      newErrors.phone = "Số điện thoại không hợp lệ.";
     }
-    if (!formData.message) tempErrors.message = "Vui lòng nhập tin nhắn.";
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
+    if (!formData.message.trim()) newErrors.message = "Vui lòng nhập tin nhắn.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Xử lý khi gửi form
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
+      setIsSubmitting(true);
       try {
         const response = await fetch("https://be.contienda.wealthfarming.org/api/contacts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData), // Convert formData to JSON format
+          body: JSON.stringify(formData),
         });
-  
+
         if (response.ok) {
-          // Handle successful response
           setSuccess(true);
           setFormData({
             name: "",
@@ -63,33 +69,44 @@ const Contact = () => {
           });
           setErrors({});
         } else {
-          // Handle server errors
           const errorData = await response.json();
           console.error("Failed to submit form:", errorData);
-          setSuccess(false);
+          setErrors({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
         }
       } catch (error) {
-        // Handle network errors
         console.error("Error submitting form:", error);
-        setSuccess(false);
+        setErrors({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
-  
 
   return (
-    <div className="bg-gray-100 py-8 px-4 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-[500px] w-full">
-        <h2 className="text-2xl font-bold mb-4 text-center">Liên Hệ Với Chúng Tôi</h2>
-        {success && (
-          <div className="text-green-600 mb-4 text-center">
-            Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.
-          </div>
-        )}
-        <form onSubmit={handleSubmit}>
-          {/* Họ và Tên */}
+    <div className="bg-gray-100 dark:bg-gray-900 py-12 px-4 min-h-screen flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-[500px] w-full"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">Liên Hệ Với Chúng Tôi</h2>
+        <AnimatePresence>
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+              role="alert"
+            >
+              <span className="block sm:inline">Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-medium">
+            <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Họ và Tên
             </label>
             <input
@@ -98,18 +115,18 @@ const Contact = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full p-2 mt-1 border rounded-md ${
-                errors.name ? "border-red-500" : "border-gray-300"
+              className={`w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
               }`}
+              required
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
 
-          {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-medium">
+            <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Email
             </label>
             <input
@@ -118,41 +135,38 @@ const Contact = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full p-2 mt-1 border rounded-md ${
-                errors.email ? "border-red-500" : "border-gray-300"
+              className={`w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.email ? "border-red-500" : "border-gray-300 dark:border-gray-600"
               }`}
+              required
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
 
-          {/* Số Điện Thoại */}
           <div className="mb-4">
-            <label htmlFor="phone" className="block text-gray-700 font-medium">
+            <label htmlFor="phone" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Số Điện Thoại
             </label>
             <input
-              type="text"
+              type="tel"
               id="phone"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`w-full p-2 mt-1 border rounded-md ${
-                errors.phone ? "border-red-500" : "border-gray-300"
+              className={`w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.phone ? "border-red-500" : "border-gray-300 dark:border-gray-600"
               }`}
+              required
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
             )}
           </div>
 
-          {/* Tin nhắn */}
-          <div className="mb-4">
-            <label
-              htmlFor="message"
-              className="block text-gray-700 font-medium"
-            >
+          <div className="mb-6">
+            <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Tin Nhắn
             </label>
             <textarea
@@ -160,27 +174,31 @@ const Contact = () => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows="4"
-              className={`w-full p-2 mt-1 border rounded-md ${
-                errors.message ? "border-red-500" : "border-gray-300"
+              rows={4}
+              className={`w-full p-3 border rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.message ? "border-red-500" : "border-gray-300 dark:border-gray-600"
               }`}
+              required
             ></textarea>
             {errors.message && (
               <p className="text-red-500 text-sm mt-1">{errors.message}</p>
             )}
           </div>
 
-          {/* Nút Gửi */}
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition duration-200"
+            disabled={isSubmitting}
+            className={`w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-primary-dark transition duration-300 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Gửi
+            {isSubmitting ? "Đang gửi..." : "Gửi"}
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 export default Contact;
+

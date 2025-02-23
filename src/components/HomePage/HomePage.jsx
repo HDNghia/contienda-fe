@@ -5,9 +5,9 @@ import Products from "../Products/Products";
 import TopProducts from "../TopProducts/TopProducts";
 import Banner from "../Banner/Banner";
 import FAQ from "../FAQ/FAQ";
-import Footer from "../Footer/Footer";
 import Contact from "../Contact/Contact";
 import AboutUs from "../AboutUs/AboutUs";
+import BlogPage from "../Blog/Blog";
 
 const HomePage = ({ handleOrderPopup }) => {
   const location = useLocation();
@@ -33,13 +33,15 @@ const HomePage = ({ handleOrderPopup }) => {
       <TopProducts handleOrderPopup={handleOrderPopup} />
       <Banner />
       <section id="about-us">
-        <AboutUs />
+        <AboutUs handleOrderPopup={handleOrderPopup}/>
+      </section>
+      <section id="blog">
+        <BlogPage/>
       </section>
       <FAQ />
       <section id="contact">
         <Contact />
       </section>
-      <Footer />
     </>
   );
 };
