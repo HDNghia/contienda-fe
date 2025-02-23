@@ -12,7 +12,7 @@ const AboutUs = ({ handleOrderPopup }) => {
   const stats = [
     { icon: <FaUsers />, value: '1000+', label: 'Khách Hàng Hài Lòng' },
     { icon: <FaHistory />, value: '20+', label: 'Năm Kinh Nghiệm' },
-    { icon: <FaTrophy />, value: '50+', label: 'Khu Nghĩa Trang' },
+    { icon: <FaTrophy />, value: '100+', label: 'Dự Án Hoàn Thành' },
     { icon: <FaHandshake />, value: '100%', label: 'Cam Kết Chất Lượng' },
   ];
 
@@ -29,9 +29,11 @@ const AboutUs = ({ handleOrderPopup }) => {
           }}
           className="text-center mb-16"
         >
-          <motion.h1 variants={fadeIn} className="text-4xl font-bold mb-4">Giới Thiệu</motion.h1>
+          <motion.h1 variants={fadeIn} className="text-4xl font-bold mb-4">
+            Giới Thiệu Lan Can Đá Non Nước
+          </motion.h1>
           <motion.p variants={fadeIn} className="text-lg text-gray-600 dark:text-gray-400">
-            Tìm hiểu thêm về sứ mệnh, giá trị và đội ngũ đứng sau những nỗ lực của chúng tôi trong việc cung cấp nơi an nghỉ trang nghiêm và ý nghĩa.
+            Khám phá sự tinh tế và bền vững của lan can đá non nước – giải pháp hoàn hảo cho không gian sống và kiến trúc hiện đại.
           </motion.p>
         </motion.div>
 
@@ -44,7 +46,7 @@ const AboutUs = ({ handleOrderPopup }) => {
           >
             <img
               src={aboutUs}
-              alt="Khu Nghĩa Trang"
+              alt="Lan Can Đá Non Nước"
               className="rounded-lg shadow-xl w-full h-auto"
             />
             <div className="absolute inset-0 bg-primary opacity-20 rounded-lg"></div>
@@ -63,13 +65,13 @@ const AboutUs = ({ handleOrderPopup }) => {
               Chúng Tôi Là Ai
             </motion.h2>
             <motion.p variants={fadeIn} className="mb-6 text-gray-700 dark:text-gray-300 leading-relaxed">
-              Chúng tôi là nhà cung cấp uy tín chuyên về các giải pháp nghĩa trang chất lượng cao, mang đến sự yên tĩnh, trang nghiêm và bền vững cho người thân yêu của bạn.
+              Chúng tôi là nhà cung cấp uy tín chuyên về lan can đá non nước tinh xảo, mang đến sự an toàn, thẩm mỹ và độ bền vượt trội cho không gian công trình của bạn.
             </motion.p>
             <motion.h2 variants={fadeIn} className="text-3xl font-bold mb-6 text-primary dark:text-primary-light">
               Sứ Mệnh Của Chúng Tôi
             </motion.h2>
             <motion.p variants={fadeIn} className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Sứ mệnh của chúng tôi là tạo ra những không gian an nghỉ vĩnh hằng với sự chăm sóc tận tâm và tôn trọng cao nhất, đảm bảo mỗi khu vực nghĩa trang đều phản ánh sự tôn kính và ý nghĩa vượt thời gian.
+              Sứ mệnh của chúng tôi là cung cấp những giải pháp lan can đá non nước chất lượng cao, kết hợp giữa nghệ thuật thiết kế và độ bền vững, góp phần nâng tầm vẻ đẹp của mỗi công trình.
             </motion.p>
           </motion.div>
         </div>
@@ -99,14 +101,15 @@ const AboutUs = ({ handleOrderPopup }) => {
           className="text-center"
         >
           <h2 className="text-3xl font-bold mb-6 text-primary dark:text-primary-light">
-            Khám Phá Những Giải Pháp Nghĩa Trang Của Chúng Tôi
+            Khám Phá Sản Phẩm Lan Can Đá Non Nước Tinh Tế
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Hãy để chúng tôi đồng hành cùng bạn trong việc chọn lựa nơi an nghỉ vĩnh hằng cho người thân yêu. Chúng tôi cam kết mang đến dịch vụ tận tâm và chu đáo nhất.
+            Hãy để chúng tôi đồng hành cùng bạn trong việc lựa chọn giải pháp lan can đá non nước chất lượng, giúp tối ưu hóa không gian sống và kiến trúc công trình của bạn.
           </p>
           <button 
-          className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full transition-colors duration-300"
-          onClick={handleOrderPopup}>
+            className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full transition-colors duration-300"
+            onClick={handleOrderPopup}
+          >
             Liên Hệ Ngay
           </button>
         </motion.div>
